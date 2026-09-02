@@ -1,0 +1,304 @@
+
+
+<style>
+  *{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+    .found-wrapper {
+        min-height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+        background: #f5f7fb;
+    }
+
+    .found-card {
+        width: 100%;
+        max-width: 750px;
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 35px;
+        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.10);
+    }
+
+    .found-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .found-icon {
+        width: 65px;
+        height: 65px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 18px;
+        background: #e8f0ff;
+        font-size: 30px;
+    }
+
+    .found-header h2 {
+        margin: 15px 0 8px;
+        color: #0f172a;
+        font-size: 28px;
+    }
+
+    .found-header p {
+        color: #64748b;
+        margin: 0;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group.full {
+        grid-column: 1 / -1;
+    }
+
+    .form-group label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #334155;
+        margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 13px 15px;
+        border: 1px solid #dbe2ea;
+        border-radius: 11px;
+        outline: none;
+        font-size: 14px;
+        color: #1e293b;
+        background: #f8fafc;
+        transition: 0.25s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #2563eb;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .image-box {
+        border: 2px dashed #cbd5e1;
+        border-radius: 14px;
+        padding: 25px;
+        text-align: center;
+        background: #f8fafc;
+        transition: 0.25s;
+    }
+
+    .image-box:hover {
+        border-color: #2563eb;
+        background: #f1f5ff;
+    }
+
+    .image-box input {
+        border: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .submit-btn {
+        width: 100%;
+        margin-top: 25px;
+        padding: 15px;
+        border: none;
+        border-radius: 12px;
+        background: #2563eb;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    .submit-btn:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    .required {
+        color: #ef4444;
+    }
+
+    @media (max-width: 650px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group.full {
+            grid-column: auto;
+        }
+
+        .found-card {
+            padding: 25px 20px;
+        }
+    }
+</style>
+
+<a href="{%  url 'home' %}">Home</a>
+<div class="found-wrapper">
+
+    <div class="found-card">
+
+        <div class="found-header">
+            <div class="found-icon">🔎</div>
+
+            <h2>Report a Found Item</h2>
+
+            <p>
+                Enter the details below to help the owner identify their item.
+            </p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>
+                        Item Name <span class="required">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="itemName"
+                        placeholder="e.g. Black Wallet"
+                        required
+                    >
+                </div>
+                {% comment %}
+                <div class="form-group">
+                    <label>
+                        Item Category <span class="required">*</span>
+                    </label>
+
+                    <select name="category" required>
+                        <option value="">Select category</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Wallet">Wallet</option>
+                        <option value="Documents">Documents</option>
+                        <option value="Bag">Bag</option>
+                        <option value="Jewelry">Jewelry</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                {% endcomment%}
+
+                <div class="form-group">
+                    <label>
+                        Found Date <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="date"
+                        name="foundDate"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Found Location <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="location"
+                        placeholder="e.g. Kathmandu Mall"
+                        required
+                    >
+                </div>
+
+                <div class="form-group full">
+                    <label>
+                        Item Description <span class="required">*</span>
+                    </label>
+
+                    <textarea
+                        name="itemDescription"
+                        placeholder="Describe the item, color, brand, special marks, etc."
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <label>Item Image</label>
+
+                    <div class="image-box">
+                        <input
+                            type="file"
+                            name="itemImage"
+                            accept="image/*"
+                        >
+
+                        <p>
+                            Upload a clear photo of the found item
+                        </p>
+                    </div>
+                </div>
+                {% comment %}
+                <div class="form-group">
+                    <label>
+                        Your Name <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="finder_name"
+                        placeholder="Enter your name"
+                        required
+                    >
+                </div>
+                {% endcomment %}
+
+                <div class="form-group">
+                    <label>
+                        Contact Number <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="tel"
+                        name="phoneNo"
+                        placeholder="98XXXXXXXX"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Submit Found Item
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
