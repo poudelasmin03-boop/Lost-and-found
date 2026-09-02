@@ -128,7 +128,9 @@ MAILERS = {
 }
 
 
-
+STATICFILES_DIR = [
+    BASE_DIR/"static"
+]
 
 
 MEDIA_URL = '/media/'

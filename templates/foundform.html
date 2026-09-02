@@ -1,304 +1,326 @@
+{% extends 'base.html' %}
+
+{% load static %}
 
 
-<style>
-  *{
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
-    .found-wrapper {
-        min-height: 90vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 40px 20px;
-        background: #f5f7fb;
-    }
+    <title>Found Items | FindBack</title>
+    {% block css %}
+      <link 
+     rel="stylesheet"
+      href="{% static 'CSS/founditem.css' %}">
+      {% endblock %}
+    
 
-    .found-card {
-        width: 100%;
-        max-width: 750px;
-        background: #ffffff;
-        border-radius: 22px;
-        padding: 35px;
-        box-shadow: 0 15px 40px rgba(15, 23, 42, 0.10);
-    }
+{% block content %}
 
-    .found-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
+      
 
-    .found-icon {
-        width: 65px;
-        height: 65px;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 18px;
-        background: #e8f0ff;
-        font-size: 30px;
-    }
+<!-- ================= PAGE ================= -->
 
-    .found-header h2 {
-        margin: 15px 0 8px;
-        color: #0f172a;
-        font-size: 28px;
-    }
+<main class="page">
 
-    .found-header p {
-        color: #64748b;
-        margin: 0;
-    }
 
-    .form-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
+    <!-- ================= HERO ================= -->
 
-    .form-group {
-        display: flex;
-        flex-direction: column;
-    }
+    <section class="hero">
 
-    .form-group.full {
-        grid-column: 1 / -1;
-    }
+        <div class="circle-one"></div>
+        <div class="circle-two"></div>
 
-    .form-group label {
-        font-size: 14px;
-        font-weight: 600;
-        color: #334155;
-        margin-bottom: 8px;
-    }
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 13px 15px;
-        border: 1px solid #dbe2ea;
-        border-radius: 11px;
-        outline: none;
-        font-size: 14px;
-        color: #1e293b;
-        background: #f8fafc;
-        transition: 0.25s;
-    }
+        <div class="hero-content">
 
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-        border-color: #2563eb;
-        background: #ffffff;
-        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
-    }
+            <div class="hero-label">
 
-    .form-group textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
+                <i class="fa-solid fa-hand-holding-heart"></i>
 
-    .image-box {
-        border: 2px dashed #cbd5e1;
-        border-radius: 14px;
-        padding: 25px;
-        text-align: center;
-        background: #f8fafc;
-        transition: 0.25s;
-    }
-
-    .image-box:hover {
-        border-color: #2563eb;
-        background: #f1f5ff;
-    }
-
-    .image-box input {
-        border: none;
-        background: transparent;
-        box-shadow: none;
-    }
-
-    .submit-btn {
-        width: 100%;
-        margin-top: 25px;
-        padding: 15px;
-        border: none;
-        border-radius: 12px;
-        background: #2563eb;
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: 0.25s;
-    }
-
-    .submit-btn:hover {
-        background: #1d4ed8;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
-    }
-
-    .required {
-        color: #ef4444;
-    }
-
-    @media (max-width: 650px) {
-        .form-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .form-group.full {
-            grid-column: auto;
-        }
-
-        .found-card {
-            padding: 25px 20px;
-        }
-    }
-</style>
-
-<a href="{%  url 'home' %}">Home</a>
-<div class="found-wrapper">
-
-    <div class="found-card">
-
-        <div class="found-header">
-            <div class="found-icon">🔎</div>
-
-            <h2>Report a Found Item</h2>
-
-            <p>
-                Enter the details below to help the owner identify their item.
-            </p>
-        </div>
-
-        <form method="POST" enctype="multipart/form-data">
-
-            {% csrf_token %}
-
-            <div class="form-grid">
-
-                <div class="form-group">
-                    <label>
-                        Item Name <span class="required">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        name="itemName"
-                        placeholder="e.g. Black Wallet"
-                        required
-                    >
-                </div>
-                {% comment %}
-                <div class="form-group">
-                    <label>
-                        Item Category <span class="required">*</span>
-                    </label>
-
-                    <select name="category" required>
-                        <option value="">Select category</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Wallet">Wallet</option>
-                        <option value="Documents">Documents</option>
-                        <option value="Bag">Bag</option>
-                        <option value="Jewelry">Jewelry</option>
-                        <option value="Clothing">Clothing</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                {% endcomment%}
-
-                <div class="form-group">
-                    <label>
-                        Found Date <span class="required">*</span>
-                    </label>
-
-                    <input
-                        type="date"
-                        name="foundDate"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label>
-                        Found Location <span class="required">*</span>
-                    </label>
-
-                    <input
-                        type="text"
-                        name="location"
-                        placeholder="e.g. Kathmandu Mall"
-                        required
-                    >
-                </div>
-
-                <div class="form-group full">
-                    <label>
-                        Item Description <span class="required">*</span>
-                    </label>
-
-                    <textarea
-                        name="itemDescription"
-                        placeholder="Describe the item, color, brand, special marks, etc."
-                        required
-                    ></textarea>
-                </div>
-
-                <div class="form-group full">
-                    <label>Item Image</label>
-
-                    <div class="image-box">
-                        <input
-                            type="file"
-                            name="itemImage"
-                            accept="image/*"
-                        >
-
-                        <p>
-                            Upload a clear photo of the found item
-                        </p>
-                    </div>
-                </div>
-                {% comment %}
-                <div class="form-group">
-                    <label>
-                        Your Name <span class="required">*</span>
-                    </label>
-
-                    <input
-                        type="text"
-                        name="finder_name"
-                        placeholder="Enter your name"
-                        required
-                    >
-                </div>
-                {% endcomment %}
-
-                <div class="form-group">
-                    <label>
-                        Contact Number <span class="required">*</span>
-                    </label>
-
-                    <input
-                        type="tel"
-                        name="phoneNo"
-                        placeholder="98XXXXXXXX"
-                        required
-                    >
-                </div>
+                HELP PEOPLE FIND THEIR BELONGINGS
 
             </div>
 
-            <button type="submit" class="submit-btn">
-                Submit Found Item
-            </button>
 
-        </form>
+            <h1>
 
-    </div>
+                Found Something?
 
-</div>
+                <br>
 
+                <span>Maybe Someone Is Looking For It.</span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Browse items that have been found and reported
+                by people in the community. Search by item name
+                or location to find something that belongs to you.
+
+            </p>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-container">
+
+                <form
+                    method="GET"
+                    action="{% url 'search' %}#result"
+                    class="search-form"
+                >
+
+
+                    <div class="search-input">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Search item name..."
+                            value="{{ name|default:'' }}"
+                        >
+
+                    </div>
+
+
+                    <div class="search-input">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <input
+                            type="text"
+                            name="location"
+                            placeholder="Search location..."
+                            value="{{ location|default:'' }}"
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="search-btn"
+                    >
+
+                        <i class="fa-solid fa-search"></i>
+
+                        Search
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ITEMS ================= -->
+
+    <section id="result" class="items-section">
+
+
+        <div class="section-heading">
+
+            <small>
+                Community Reports
+            </small>
+
+            <h2>
+                Recently Found Items
+            </h2>
+
+            <p>
+                These items have been reported by members of our community.
+            </p>
+
+        </div>
+
+
+        {% if items %}
+
+            <div class="items-grid">
+
+
+                {% for item in items %}
+
+
+                    <article class="item-card">
+
+
+                        <!-- IMAGE -->
+
+                        <div class="item-image">
+
+                            {% if item.itemImage %}
+
+                                <img
+                                    src="{{ item.itemImage.url }}"
+                                    alt="{{ item.itemName }}"
+                                >
+
+                            {% else %}
+
+                                <div style="
+                                    width:100%;
+                                    height:100%;
+                                    display:flex;
+                                    align-items:center;
+                                    justify-content:center;
+                                    font-size:55px;
+                                    color:#6366f1;
+                                ">
+
+                                    <i class="fa-solid fa-image"></i>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <div class="found-badge">
+
+                                <i class="fa-solid fa-check"></i>
+
+                                Found
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CONTENT -->
+
+                        <div class="item-content">
+
+
+                            <h3>
+                                {{ item.itemName }}
+                            </h3>
+
+
+                            <p class="description">
+
+                                {{ item.itemDescription }}
+
+                            </p>
+
+
+                            <div class="item-details">
+
+
+                                <div class="detail">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    <span>
+                                        {{ item.location }}
+                                    </span>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <i class="fa-solid fa-calendar-days"></i>
+
+                                    <span>
+                                        {{ item.foundDate }}
+                                    </span>
+
+                                </div>
+
+
+                                <div class="detail">
+
+                                    <i class="fa-solid fa-phone"></i>
+
+                                    <span>
+                                        {{ item.phoneNo }}
+                                    </span>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <a href="#" class="view-button">
+
+                                View Details
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+
+                        </div>
+
+                    </article>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <div class="empty">
+
+                <i class="fa-solid fa-box-open"></i>
+
+                <h3>
+                    No Found Items
+                </h3>
+
+                <p>
+                    No items were found matching your search.
+                    Try searching with another item name or location.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta">
+
+        <h2>
+            Found Something That Isn't Yours?
+        </h2>
+
+        <p>
+            Report it on FindBack and help the owner get it back.
+        </p>
+
+        <a
+            href="{% url 'foundform' %}"
+            class="cta-button"
+        >
+
+            <i class="fa-solid fa-plus"></i>
+
+            Report Found Item
+
+        </a>
+
+    </section>
+
+
+</main>
+
+
+{% endblock %}

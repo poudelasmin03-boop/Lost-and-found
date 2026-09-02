@@ -3,6 +3,8 @@ from .models import Itemdetails
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+import numpy as np
+from django.db.models import Q
 import cv2
 # Create your views here.
 def home_views(request):
@@ -19,7 +21,19 @@ def Foundform(request):
      phoneNo = request.POST.get('phoneNo')
      
      #checking image clearity
-     image = cv2.imread(itemImage)
+     if not  itemImage:
+         print("error")
+         return
+     
+     
+     image_data = np.frombuffer(itemImage.read(), np.uint8)
+     image = cv2.imdecode(image_data, cv2.IMREAD_COLOR)
+     
+    #  image = cv2.imread("itemImage")
+     print(image)
+     if image is None:
+       return render(request,'foundform.html',{'error':"Empty Image." })
+         
      
      gray_image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
      
@@ -122,3 +136,28 @@ def logout_views(request):
     logout(request)
 
     return redirect('home')  
+
+
+# ======Get items ===== 
+def FoundItems(request,id):
+    items = Itemdetails.objects.all()
+    return render(request,"foundform.html",{"items":items})
+
+
+
+
+# ====Search Items====
+
+def search_items(request):
+    name =  request.GET.get('name')
+    location = request.GET.get('location')
+    
+    if name or location:
+        if Itemdetails.objects.filter(Q(itemName = name) | Q(location__icontains = location)):
+            items = Itemdetails.objects.all()
+            return render(request,'foundform.html',{'items':items})
+        
+        
+    
+        return render(request,'foundform.html',{'error':"error"})    
+            

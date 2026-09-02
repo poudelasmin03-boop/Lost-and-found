@@ -1,36 +1,185 @@
+{% load static %}
+
 <!DOCTYPE html>
+<html lang="en">
 
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Home</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-  </head>
-  <body> 
+<head>
 
-    {% if message %}
-    
-      <div>
-         <span>*</span>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-         <p>{{message}}</p>
-      </div>
-    {% endif %}
-  
-    <h1>Hello world</h1>
-    <a href="{% url 'foundform' %}">Form</a>
-    <div class="nav-btn">
-          {% if request.user.is_authenticated %}
-          
-          <a href="{% url 'logout' %}" class="logout-btn btn"> Logout </a>
-          {% else %}
-          <a href="{% url 'login' %}" class="login-btn">Login</a>
-          <a href="{% url 'register' %}" class="register-btn">Register</a>
-          {% endif %}
+    <title>FindBack | Report Found Item</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+    <!-- CSS file -->
+     <link 
+     rel="stylesheet"
+      href="{% static 'CSS/base.css' %}">
+
+       {% block css %}
+     
+      {% endblock %}
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
         </div>
 
-  </body>  
+        FindBack
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="#">
+            Lost Items
+        </a>
+
+        <a href="{%  url 'foundform' %}">
+            Found Items
+        </a>
+
+        <a href="#">
+            About
+        </a>
+
+
+        {% if request.user.is_authenticated %}
+
+            <a href="#" class="profile-btn">
+
+                <i class="fa-solid fa-user"></i>
+
+                {{ request.user.username }}
+
+            </a>
+
+        {% else %}
+
+            <a href="#" class="profile-btn">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                Login
+
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+{% block content%}
+{% endblock %}
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        FindBack
+
+    </div>
+
+
+    <p>
+
+        Connecting lost belongings with their rightful owners.
+
+    </p>
+
+
+    <p class="copyright">
+
+        © 2026 FindBack. All rights reserved.
+
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+    const imageInput =
+        document.getElementById("itemImage");
+
+    const uploadText =
+        document.getElementById("uploadText");
+
+
+    imageInput.addEventListener(
+        "change",
+        function () {
+
+            if (this.files.length > 0) {
+
+                uploadText.innerHTML =
+                    '<i class="fa-solid fa-circle-check"></i> '
+                    + this.files[0].name;
+
+            }
+
+            else {
+
+                uploadText.innerHTML =
+                    "Click to upload an image";
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
 </html>

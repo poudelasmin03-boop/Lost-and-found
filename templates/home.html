@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+<section class="hero">
+
+    <div class="hero-box">
+
+        <div class="hero-content">
+
+            <span class="hero-tag">
+
+                <i class="fa-solid fa-hand-holding-heart"></i>
+
+                HELP SOMEONE FIND THEIR BELONGINGS
+
+            </span>
+
+
+            <h1>
+
+                Found Something?
+
+                <br>
+
+                Help It Find Its Owner.
+
+            </h1>
+
+
+            <p>
+
+                Report the item you found and help reconnect
+                someone with their lost belongings. Provide
+                accurate information and a clear photo to make
+                the search easier.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FORM
+========================= -->
+
+<section class="form-wrapper">
+
+    <div class="form-card">
+
+
+        <div class="form-title">
+
+            <h2>
+                Report a Found Item
+            </h2>
+
+            <p>
+                Provide accurate information so the owner can
+                identify and claim their item.
+            </p>
+
+        </div>
+
+
+
+        <!-- ERROR -->
+
+        {% if error %}
+
+            <div class="error-message">
+
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                {{ error }}
+
+            </div>
+
+        {% endif %}
+
+
+
+        <!-- FORM -->
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="form-grid">
+
+
+                <!-- ITEM NAME -->
+
+                <div class="input-group">
+
+                    <label class="input-label">
+
+                        <i class="fa-solid fa-box"></i>
+
+                        Item Name
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="itemName"
+                        placeholder="e.g. Black Wallet"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- LOCATION -->
+
+                <div class="input-group">
+
+                    <label class="input-label">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Found Location
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="location"
+                        placeholder="e.g. Kathmandu Mall"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="input-group">
+
+                    <label class="input-label">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        Found Date
+
+                    </label>
+
+
+                    <input
+                        type="date"
+                        name="foundDate"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- PHONE -->
+
+                <div class="input-group">
+
+                    <label class="input-label">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        Contact Number
+
+                    </label>
+
+
+                    <input
+                        type="tel"
+                        name="phoneNo"
+                        placeholder="Your contact number"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="input-group full">
+
+                    <label class="input-label">
+
+                        <i class="fa-solid fa-align-left"></i>
+
+                        Item Description
+
+                    </label>
+
+
+                    <textarea
+                        name="itemDescription"
+                        placeholder="Describe the item, color, brand, unique marks, etc."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- IMAGE -->
+
+                <div class="input-group full">
+
+                    <label class="input-label">
+
+                        <i class="fa-solid fa-image"></i>
+
+                        Item Image
+
+                    </label>
+
+
+                    <label class="upload-box">
+
+                        <div class="upload-icon">
+
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                        </div>
+
+
+                        <div
+                            class="upload-title"
+                            id="uploadText"
+                        >
+
+                            Click to upload an image
+
+                        </div>
+
+
+                        <div class="upload-description">
+
+                            JPG, JPEG or PNG • Clear image recommended
+
+                        </div>
+
+
+                        <input
+                            class="upload-input"
+                            type="file"
+                            name="itemImage"
+                            id="itemImage"
+                            accept="image/jpeg,image/png,image/jpg"
+                            required
+                        >
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- SUBMIT -->
+
+                <div class="input-group full">
+
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                    >
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                        Publish Found Item
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+{% endblock%}

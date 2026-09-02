@@ -1,0 +1,699 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f5f7ff;
+            color: #172033;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            width: 100%;
+            background: #ffffff;
+
+            padding: 17px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            box-shadow: 0 5px 25px rgba(30, 41, 80, 0.07);
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            color: #4f46e5;
+
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed
+            );
+
+            color: white;
+
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #667085;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        .profile-btn {
+            padding: 11px 18px;
+
+            border-radius: 12px;
+
+            background: #eef2ff;
+
+            color: #4f46e5 !important;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            max-width: 1200px;
+
+            margin: 50px auto 0;
+
+            padding: 0 25px;
+        }
+
+        .hero-box {
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 30px;
+
+            padding: 65px 70px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #4338ca,
+                    #6366f1,
+                    #7c3aed
+                );
+
+            color: white;
+
+            box-shadow:
+                0 20px 50px rgba(67, 56, 202, 0.22);
+        }
+
+        .hero-box::before {
+            content: "";
+
+            position: absolute;
+
+            width: 330px;
+            height: 330px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.09);
+
+            right: -90px;
+            top: -130px;
+        }
+
+        .hero-box::after {
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.07);
+
+            left: 45%;
+            bottom: -150px;
+        }
+
+        .hero-content {
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 700px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 9px 15px;
+
+            background: rgba(255, 255, 255, 0.14);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 50px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.4px;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 54px);
+
+            line-height: 1.1;
+
+            margin-bottom: 20px;
+
+            letter-spacing: -1.5px;
+        }
+
+        .hero p {
+            max-width: 620px;
+
+            color: #e8e9ff;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+        }
+
+        /* =========================
+           FORM WRAPPER
+        ========================= */
+
+        .form-wrapper {
+            max-width: 1000px;
+
+            margin: -35px auto 70px;
+
+            padding: 0 25px;
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+        .form-card {
+            background: white;
+
+            border-radius: 25px;
+
+            padding: 42px;
+
+            box-shadow:
+                0 20px 60px rgba(25, 32, 70, 0.12);
+        }
+
+        .form-title {
+            margin-bottom: 30px;
+        }
+
+        .form-title h2 {
+            font-size: 25px;
+
+            margin-bottom: 8px;
+
+            color: #182033;
+        }
+
+        .form-title p {
+            color: #7b8498;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           ERROR MESSAGE
+        ========================= */
+
+        .error-message {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            background: #fff1f2;
+
+            color: #e11d48;
+
+            padding: 14px 17px;
+
+            border-radius: 12px;
+
+            margin-bottom: 22px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            border: 1px solid #ffe4e6;
+        }
+
+        /* =========================
+           FORM GRID
+        ========================= */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 24px;
+        }
+
+        .input-group {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 9px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        /* =========================
+           LABEL
+        ========================= */
+
+        label {
+            color: #30394d;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .input-label {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+        }
+
+        .input-label i {
+            color: #6366f1;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           INPUTS
+        ========================= */
+
+        input,
+        textarea,
+        select {
+
+            width: 100%;
+
+            padding: 14px 16px;
+
+            border: 1px solid #e1e5ef;
+
+            border-radius: 13px;
+
+            background: #fafbff;
+
+            color: #172033;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: all 0.25s ease;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #a1a8b7;
+        }
+
+        input:hover,
+        textarea:hover,
+        select:hover {
+            border-color: #c7cbe0;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+
+            background: white;
+
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 4px rgba(99, 102, 241, 0.10);
+        }
+
+        textarea {
+
+            min-height: 125px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           UPLOAD BOX
+        ========================= */
+
+        .upload-box {
+
+            min-height: 190px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 30px;
+
+            border: 2px dashed #d3d7e5;
+
+            border-radius: 18px;
+
+            background: #fafbff;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+        }
+
+        .upload-box:hover {
+
+            border-color: #6366f1;
+
+            background: #f6f4ff;
+
+            transform: translateY(-1px);
+        }
+
+        .upload-icon {
+
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 16px;
+
+            background: #ede9fe;
+
+            color: #6366f1;
+
+            margin-bottom: 14px;
+        }
+
+        .upload-icon i {
+            font-size: 23px;
+        }
+
+        .upload-title {
+
+            color: #343b4f;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+        }
+
+        .upload-description {
+
+            color: #8b93a5;
+
+            font-size: 12px;
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        /* =========================
+           SUBMIT BUTTON
+        ========================= */
+
+        .submit-btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 16px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #7c3aed
+                );
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px rgba(79, 70, 229, 0.25);
+
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 30px rgba(79, 70, 229, 0.32);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn i {
+            margin-right: 8px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #111827;
+
+            padding: 45px 20px;
+
+            text-align: center;
+
+            color: white;
+        }
+
+        .footer-logo {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            margin-bottom: 10px;
+        }
+
+        .footer-logo i {
+            color: #818cf8;
+        }
+
+        footer p {
+
+            color: #9ca3af;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .copyright {
+
+            margin-top: 14px;
+
+            font-size: 12px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a:not(.profile-btn) {
+                display: none;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .logo-icon {
+                width: 39px;
+                height: 39px;
+            }
+
+            .hero {
+
+                margin-top: 25px;
+
+                padding: 0 15px;
+            }
+
+            .hero-box {
+
+                padding: 45px 25px;
+
+                border-radius: 23px;
+            }
+
+            .hero h1 {
+
+                font-size: 35px;
+
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 13px;
+            }
+
+            .form-wrapper {
+
+                margin-top: -20px;
+
+                padding: 0 15px;
+            }
+
+            .form-card {
+
+                padding: 27px 20px;
+
+                border-radius: 20px;
+            }
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .navbar {
+                padding: 13px 15px;
+            }
+
+            .profile-btn {
+                padding: 9px 12px;
+            }
+
+            .hero-box {
+                padding: 38px 20px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .form-card {
+                padding: 24px 16px;
+            }
+
+            .form-title h2 {
+                font-size: 22px;
+            }
+
+            .upload-box {
+                min-height: 170px;
+            }
+        }
+
+   
