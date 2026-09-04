@@ -1,340 +1,137 @@
-<style>
-  * {
-    box-sizing: border-box;
-}
+{% extends "base.html" %}
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(135deg, #eef4ff, #f8fafc);
-    color: #1e293b;
-}
+{% block title %}Create Account — FindBack{% endblock %}
 
-.Register-main-container {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 35px 20px;
-}
+{% block content %}
 
-.registerContainer {
-    position: relative;
-    width: 100%;
-    max-width: 460px;
-    padding: 40px 38px 35px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    box-shadow:
-        0 20px 50px rgba(15, 23, 42, 0.10),
-        0 5px 15px rgba(15, 23, 42, 0.05);
-    animation: registerCard 0.5s ease;
-}
+<section class="auth-page">
 
-@keyframes registerCard {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+<div class="auth-container">
 
-.x-mark {
-    position: absolute;
-    top: 18px;
-    right: 20px;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background: #f8fafc;
-    color: #64748b;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
+    <div class="auth-brand">
 
-.x-mark:hover {
-    color: #ffffff;
-    background: #ef4444;
-    transform: rotate(90deg);
-}
+        <div class="auth-logo">
+            ✦
+        </div>
 
-.x-registermark {
-    font-size: 16px;
-}
+        <h1>
+            Join <span>FindBack.</span>
+        </h1>
 
-.registerh2 {
-    margin: 0 0 28px;
-    text-align: center;
-    font-size: 28px;
-    font-weight: 700;
-    color: #0f172a;
-    letter-spacing: -0.5px;
-}
+        <p>
+            Become part of a community helping people
+            recover their lost belongings.
+        </p>
 
-.registerh2::after {
-    content: "";
-    display: block;
-    width: 45px;
-    height: 4px;
-    margin: 10px auto 0;
-    border-radius: 20px;
-    background: #2563eb;
-}
-
-.field {
-    position: relative;
-    margin-bottom: 20px;
-}
-
-.field label {
-    display: block;
-    margin-bottom: 8px;
-    color: #334155;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.field input {
-    width: 100%;
-    height: 50px;
-    padding: 0 15px;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    outline: none;
-    background: #ffffff;
-    color: #0f172a;
-    font-size: 14px;
-    transition: all 0.25s ease;
-}
-
-.field input::placeholder {
-    color: #94a3b8;
-}
-
-.field input:hover {
-    border-color: #94a3b8;
-}
-
-.field input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
-}
-
-#password,
-#password2 {
-    padding-right: 65px;
-}
-
-.show1,
-.show2 {
-    position: absolute;
-    right: 14px;
-    bottom: 14px;
-    z-index: 5;
-    padding: 2px 3px;
-    background: transparent;
-    color: #2563eb;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    user-select: none;
-    transition: color 0.2s ease;
-}
-
-.show1:hover,
-.show2:hover {
-    color: #1d4ed8;
-}
-
-.usererr,
-.emailerr,
-.passworderr,
-.confirmerr {
-    min-height: 0;
-    margin: 5px 0 0;
-    padding: 0;
-    color: #dc2626;
-    font-size: 13px;
-}
-
-.registerContainer p[style*="color: red"] {
-    margin: 5px 0 0 !important;
-    padding: 4px 0 !important;
-    color: #dc2626 !important;
-    font-size: 13px;
-}
-
-#submit {
-    width: 100%;
-    height: 50px;
-    margin-top: 8px;
-    border: none;
-    border-radius: 10px;
-    outline: none;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.22);
-    transition: all 0.25s ease;
-}
-
-#submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.30);
-}
-
-#submit:active {
-    transform: translateY(0);
-}
-
-@media (max-width: 600px) {
-    .Register-main-container {
-        padding: 20px 15px;
-    }
-
-    .registerContainer {
-        max-width: 100%;
-        padding: 38px 25px 30px;
-        border-radius: 16px;
-    }
-
-    .registerh2 {
-        font-size: 24px;
-        margin-bottom: 25px;
-    }
-
-    .field input {
-        height: 48px;
-    }
-
-    #submit {
-        height: 48px;
-    }
-}
-
-@media (max-width: 380px) {
-    .registerContainer {
-        padding: 35px 20px 25px;
-    }
-
-    .registerh2 {
-        font-size: 22px;
-    }
-
-    .field label {
-        font-size: 13px;
-    }
-
-    .field input {
-        font-size: 13px;
-    }
-}
-</style>
-
-   <div class="Register-main-container">
-      <div class="registerContainer">
-        <span class="x-mark">
-          <i class="fa-solid fa-xmark x-registermark"></i>
-        </span>
-
-        <h2 class="registerh2">Register Form</h2>
-
-        <form
-          onsubmit="return HandleForm();"
-          action="{% url 'register' %}"
-          method="POST"
-        >
-          {% csrf_token %}
-
-          <div class="field">
-            <label> Username </label>
-
-            <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Enter your username"
-             autocomplete="username"
-            />
-
-            <p class="usererr"></p>
-
-            {% if register_error %}
-
-            <p style="color: red; padding: 5px">{{register_error}}</p>
-
-            {% endif %}
-          </div>
-
-          <div class="field">
-            <label> Email </label>
-
-            <input
-              type="text"
-              name="email"
-              id="email"
-              placeholder="Enter your email"
-              autocomplete="email"
-            />
-
-            <p class="emailerr"></p>
-
-             {% if register_error %}
-
-            <p style="color: red; padding: 5px">{{register_error}}</p>
-
-            {% endif %}
-          </div>
-
-          <div class="field">
-            <label> Password </label>
-
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Enter your password"
-                  autocomplete="new-password"
-
-            />
-
-            <span class="show1" onclick="showPassword()"> Show </span>
-
-            <p class="passworderr"></p>
-          </div>
-
-          <div class="field">
-            <label> Confirm Password </label>
-
-            <input
-              type="password"
-              name="password2"
-              id="password2"
-              placeholder="Confirm password"
-              autocomplete="new-password"
-
-            />
-
-            <span class="show2" onclick="showPassword2()"> Show </span>
-
-            <p class="confirmerr"></p>
-          </div>
-
-          <input type="submit" id="submit" value="Submit" />
-
-         
-        </form>
-      </div>
     </div>
+
+
+    <div class="auth-card">
+
+        {% if register_error %}
+
+        <div class="form-error">
+            <span>!</span>
+            {{ register_error }}
+        </div>
+
+        {% endif %}
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <div class="input-group">
+
+                <label>
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Choose a username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    name="password2"
+                    placeholder="Confirm your password"
+                    required
+                >
+
+            </div>
+
+
+            <button class="auth-btn" type="submit">
+                Create Account
+                <span>→</span>
+            </button>
+
+        </form>
+
+
+        <div class="auth-divider">
+            <span>
+                Already have an account?
+            </span>
+        </div>
+
+
+        <a href="{% url 'login' %}" class="register-link">
+            Login instead
+        </a>
+
+    </div>
+
+</div>
+
+
+</section>
+
+{% endblock %}

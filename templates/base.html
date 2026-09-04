@@ -1,185 +1,182 @@
 {% load static %}
 
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FindBack — Lost & Found community platform helping people reunite with their lost belongings in Nepal.">
 
-    <title>FindBack | Report Found Item</title>
+    <title>{% block title %}FindBack{% endblock %}</title>
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-    <!-- CSS file -->
-     <link 
-     rel="stylesheet"
-      href="{% static 'CSS/base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-       {% block css %}
-     
-      {% endblock %}
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="{% static 'CSS/base.css' %}">
+    {% block extra_css %}{% endblock %}
 </head>
-
 
 <body>
 
+<header class="navbar">
+    <div class="nav-container">
 
-<!-- =========================
-     NAVBAR
-========================= -->
+        <a href="{% url 'home' %}" class="logo">
+            <span class="logo-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <span>
+                Find<span class="logo-blue">Back</span>
+            </span>
+        </a>
 
-<nav class="navbar">
 
-    <div class="logo">
+        <nav class="nav-links" id="navLinks">
 
-        <div class="logo-icon">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'items' %}">Browse Items</a>
+            <a href="{% url 'services' %}">Services</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'foundform' %}">Report Found</a>
 
-            <i class="fa-solid fa-magnifying-glass"></i>
+
+            {% if user.is_authenticated %}
+
+                <span class="welcome">
+                    Hi, {{ user.username }}
+                </span>
+
+                <a href="{% url 'logout' %}" class="nav-login">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}" class="nav-login">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}" class="nav-register">
+                    Get Started
+                </a>
+
+            {% endif %}
+
+        </nav>
+
+
+        <button class="mobile-menu" onclick="toggleMenu()" id="mobileMenuBtn" aria-label="Toggle menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+    </div>
+</header>
+
+{% if message %}
+
+<div class="alert success-alert" id="flashAlert">
+    <span>
+        <i class="fa-solid fa-check"></i>
+    </span>
+    {{ message }}
+</div>
+
+{% endif %}
+
+{% if error %}
+
+<div class="alert error-alert" id="flashAlert">
+    <span>
+        <i class="fa-solid fa-exclamation"></i>
+    </span>
+    {{ error }}
+</div>
+
+{% endif %}
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-brand">
+
+            <div class="logo footer-logo">
+                <span class="logo-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <span>
+                    Find<span class="logo-blue">Back</span>
+                </span>
+            </div>
+
+            <p>
+                Helping people reconnect with their lost
+                belongings and creating a safer community.
+            </p>
+
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
 
         </div>
 
-        FindBack
+
+        <div class="footer-links">
+
+            <div>
+                <h4>Explore</h4>
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'items' %}">Browse Items</a>
+                <a href="{% url 'foundform' %}">Report Found</a>
+                <a href="{% url 'services' %}">Services</a>
+                <a href="{% url 'about' %}">About Us</a>
+            </div>
+
+            <div>
+                <h4>Account</h4>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'register' %}">Register</a>
+                {% endif %}
+            </div>
+
+            <div>
+                <h4>Support</h4>
+                <a href="{% url 'about' %}">FAQ</a>
+                <a href="{% url 'about' %}">Contact Us</a>
+                <a href="{% url 'services' %}">How it Works</a>
+            </div>
+
+        </div>
 
     </div>
 
 
-    <div class="nav-links">
-
-        <a href="{% url 'home' %}">
-            Home
-        </a>
-
-        <a href="#">
-            Lost Items
-        </a>
-
-        <a href="{%  url 'foundform' %}">
-            Found Items
-        </a>
-
-        <a href="#">
-            About
-        </a>
-
-
-        {% if request.user.is_authenticated %}
-
-            <a href="#" class="profile-btn">
-
-                <i class="fa-solid fa-user"></i>
-
-                {{ request.user.username }}
-
-            </a>
-
-        {% else %}
-
-            <a href="#" class="profile-btn">
-
-                <i class="fa-solid fa-right-to-bracket"></i>
-
-                Login
-
-            </a>
-
-        {% endif %}
-
+    <div class="footer-bottom">
+        <p>
+            © 2026 FindBack. Built to reunite people with what matters.
+        </p>
     </div>
 
-</nav>
-
-
-
-<!-- =========================
-     HERO
-========================= -->
-{% block content%}
-{% endblock %}
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <div class="footer-logo">
-
-        <i class="fa-solid fa-magnifying-glass"></i>
-
-        FindBack
-
-    </div>
-
-
-    <p>
-
-        Connecting lost belongings with their rightful owners.
-
-    </p>
-
-
-    <p class="copyright">
-
-        © 2026 FindBack. All rights reserved.
-
-    </p>
 
 </footer>
 
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
-<script>
-
-    const imageInput =
-        document.getElementById("itemImage");
-
-    const uploadText =
-        document.getElementById("uploadText");
-
-
-    imageInput.addEventListener(
-        "change",
-        function () {
-
-            if (this.files.length > 0) {
-
-                uploadText.innerHTML =
-                    '<i class="fa-solid fa-circle-check"></i> '
-                    + this.files[0].name;
-
-            }
-
-            else {
-
-                uploadText.innerHTML =
-                    "Click to upload an image";
-
-            }
-
-        }
-    );
-
-</script>
-
+<script src="{% static 'js/script.js' %}"></script>
 
 </body>
-
 </html>

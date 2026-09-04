@@ -1,45 +1,120 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% load static %}
-
+{% block title %}FindBack — Lost & Found{% endblock %}
 
 {% block content %}
 
-
 <section class="hero">
 
-    <div class="hero-box">
+    <div class="hero-container">
 
         <div class="hero-content">
 
-            <span class="hero-tag">
-
-                <i class="fa-solid fa-hand-holding-heart"></i>
-
-                HELP SOMEONE FIND THEIR BELONGINGS
-
-            </span>
+            <div class="hero-badge">
+                <span class="pulse-dot"></span>
+                Helping people find what they lost
+            </div>
 
 
             <h1>
-
-                Found Something?
-
-                <br>
-
-                Help It Find Its Owner.
-
+                Lost something?
+                <span>
+                    Let's bring it back.
+                </span>
             </h1>
 
 
-            <p>
-
-                Report the item you found and help reconnect
-                someone with their lost belongings. Provide
-                accurate information and a clear photo to make
-                the search easier.
-
+            <p class="hero-text">
+                Search reported items, report something you've found,
+                and help reunite belongings with their owners.
             </p>
+
+
+            <form action="{% url 'search' %}" method="GET" class="hero-search">
+
+                <div class="search-field">
+                    <span class="search-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" name="name" placeholder="Search item name...">
+                </div>
+
+                <div class="search-field location-field">
+                    <span class="search-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </span>
+                    <input type="text" name="location" placeholder="Location...">
+                </div>
+
+                <button type="submit" class="search-button">
+                    Search
+                </button>
+
+            </form>
+
+
+            <div class="hero-actions">
+
+                <a href="{% url 'foundform' %}" class="primary-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    Report Found Item
+                </a>
+
+                <a href="#how-it-works" class="secondary-btn">
+                    How it works
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="hero-visual">
+
+            <div class="visual-card card-one">
+                <div class="mini-icon blue-bg">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+                <div>
+                    <strong>Phone found</strong>
+                    <small>New Baneshwor</small>
+                </div>
+                <span class="verified">
+                    <i class="fa-solid fa-check"></i>
+                </span>
+            </div>
+
+
+
+            <div class="main-illustration">
+                <div class="circle-bg"></div>
+                <div class="illustration-box">
+                    <div class="illustration-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="illustration-text">
+                        <span>LOST & FOUND</span>
+                        <strong>Find what matters.</strong>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="visual-card card-two">
+                <div class="mini-icon green-bg">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div>
+                    <strong>Backpack returned</strong>
+                    <small>2 hours ago</small>
+                </div>
+                <span class="heart">
+                    <i class="fa-solid fa-heart"></i>
+                </span>
+            </div>
 
         </div>
 
@@ -47,263 +122,176 @@
 
 </section>
 
+<section class="stats-section">
+
+    <div class="stats-container">
+
+        <div class="stat">
+            <strong>1,200+</strong>
+            <span>Items Reported</span>
+        </div>
+
+        <div class="stat">
+            <strong>850+</strong>
+            <span>Items Reunited</span>
+        </div>
+
+        <div class="stat">
+            <strong>95%</strong>
+            <span>Successful Connections</span>
+        </div>
+
+        <div class="stat">
+            <strong>24/7</strong>
+            <span>Community Help</span>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Recent Found Items -->
+{% if recent_items %}
+<section class="recent-section">
+    <div class="recent-container">
+
+        <div class="section-heading" style="text-align:center; margin-bottom:50px;">
+            <span class="section-label">LATEST REPORTS</span>
+            <h2>Recently <span>Found Items</span></h2>
+            <p>Browse the latest items that have been found and reported by our community.</p>
+        </div>
+
+        <div class="items-grid">
+            {% for item in recent_items %}
+            <div class="item-card">
+                {% if item.itemImage %}
+                <div class="item-img-wrap">
+                    <img src="{{ item.itemImage.url }}" alt="{{ item.itemName }}">
+                </div>
+                {% else %}
+                <div class="item-img-placeholder">
+                    <i class="fa-solid fa-image"></i>
+                </div>
+                {% endif %}
+                <div class="item-card-body">
+                    <div class="item-tag">{{ item.itemTag }}</div>
+                    <h3>{{ item.itemName }}</h3>
+                    <p>{{ item.itemDescription|truncatechars:80 }}</p>
+                    <div class="item-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> {{ item.location }}</span>
+                        <span><i class="fa-regular fa-calendar"></i> {{ item.foundDate }}</span>
+                    </div>
+                    <div class="item-contact">
+                        <a href="tel:{{ item.phoneNo }}" class="contact-btn">
+                            <i class="fa-solid fa-phone"></i>
+                            {{ item.phoneNo }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div style="text-align:center; margin-top:40px;">
+            <a href="{% url 'items' %}" class="primary-btn" style="display:inline-flex;">
+                View All Items
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+<section class="how-section" id="how-it-works">
+
+    <div class="section-heading" style="text-align:center;">
+
+        <span class="section-label">SIMPLE PROCESS</span>
+
+        <h2>
+            Finding your item
+            <span>shouldn't be complicated.</span>
+        </h2>
+
+        <p>
+            Our platform makes it easy to report, search,
+            and reconnect lost belongings.
+        </p>
+
+    </div>
 
 
-<!-- =========================
-     FORM
-========================= -->
+    <div class="steps">
 
-<section class="form-wrapper">
+        <div class="step">
+            <div class="step-number">01</div>
+            <div class="step-icon">
+                <i class="fa-solid fa-file-circle-plus"></i>
+            </div>
+            <h3>Report</h3>
+            <p>Found something? Share the details and upload a clear photo.</p>
+        </div>
 
-    <div class="form-card">
+        <div class="step-line"></div>
 
+        <div class="step">
+            <div class="step-number">02</div>
+            <div class="step-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3>Search</h3>
+            <p>Search for items by name and location.</p>
+        </div>
 
-        <div class="form-title">
+        <div class="step-line"></div>
+
+        <div class="step">
+            <div class="step-number">03</div>
+            <div class="step-icon">
+                <i class="fa-solid fa-handshake"></i>
+            </div>
+            <h3>Connect</h3>
+            <p>Contact the person who reported or found the item.</p>
+        </div>
+
+        <div class="step-line"></div>
+
+        <div class="step">
+            <div class="step-number">04</div>
+            <div class="step-icon">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h3>Reunite</h3>
+            <p>Return the item and make someone's day better.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="cta-section">
+
+    <div class="cta-content">
+
+        <div>
+            <span class="section-label light-label">FOUND SOMETHING?</span>
 
             <h2>
-                Report a Found Item
+                You could be the reason
+                someone gets it back.
             </h2>
 
-            <p>
-                Provide accurate information so the owner can
-                identify and claim their item.
-            </p>
-
+            <p>A simple report can make a huge difference.</p>
         </div>
 
-
-
-        <!-- ERROR -->
-
-        {% if error %}
-
-            <div class="error-message">
-
-                <i class="fa-solid fa-circle-exclamation"></i>
-
-                {{ error }}
-
-            </div>
-
-        {% endif %}
-
-
-
-        <!-- FORM -->
-
-        <form
-            method="POST"
-            enctype="multipart/form-data"
-        >
-
-            {% csrf_token %}
-
-
-            <div class="form-grid">
-
-
-                <!-- ITEM NAME -->
-
-                <div class="input-group">
-
-                    <label class="input-label">
-
-                        <i class="fa-solid fa-box"></i>
-
-                        Item Name
-
-                    </label>
-
-
-                    <input
-                        type="text"
-                        name="itemName"
-                        placeholder="e.g. Black Wallet"
-                        required
-                    >
-
-                </div>
-
-
-
-                <!-- LOCATION -->
-
-                <div class="input-group">
-
-                    <label class="input-label">
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                        Found Location
-
-                    </label>
-
-
-                    <input
-                        type="text"
-                        name="location"
-                        placeholder="e.g. Kathmandu Mall"
-                        required
-                    >
-
-                </div>
-
-
-
-                <!-- DATE -->
-
-                <div class="input-group">
-
-                    <label class="input-label">
-
-                        <i class="fa-solid fa-calendar-days"></i>
-
-                        Found Date
-
-                    </label>
-
-
-                    <input
-                        type="date"
-                        name="foundDate"
-                        required
-                    >
-
-                </div>
-
-
-
-                <!-- PHONE -->
-
-                <div class="input-group">
-
-                    <label class="input-label">
-
-                        <i class="fa-solid fa-phone"></i>
-
-                        Contact Number
-
-                    </label>
-
-
-                    <input
-                        type="tel"
-                        name="phoneNo"
-                        placeholder="Your contact number"
-                        required
-                    >
-
-                </div>
-
-
-
-                <!-- DESCRIPTION -->
-
-                <div class="input-group full">
-
-                    <label class="input-label">
-
-                        <i class="fa-solid fa-align-left"></i>
-
-                        Item Description
-
-                    </label>
-
-
-                    <textarea
-                        name="itemDescription"
-                        placeholder="Describe the item, color, brand, unique marks, etc."
-                        required
-                    ></textarea>
-
-                </div>
-
-
-
-                <!-- IMAGE -->
-
-                <div class="input-group full">
-
-                    <label class="input-label">
-
-                        <i class="fa-solid fa-image"></i>
-
-                        Item Image
-
-                    </label>
-
-
-                    <label class="upload-box">
-
-                        <div class="upload-icon">
-
-                            <i class="fa-solid fa-cloud-arrow-up"></i>
-
-                        </div>
-
-
-                        <div
-                            class="upload-title"
-                            id="uploadText"
-                        >
-
-                            Click to upload an image
-
-                        </div>
-
-
-                        <div class="upload-description">
-
-                            JPG, JPEG or PNG • Clear image recommended
-
-                        </div>
-
-
-                        <input
-                            class="upload-input"
-                            type="file"
-                            name="itemImage"
-                            id="itemImage"
-                            accept="image/jpeg,image/png,image/jpg"
-                            required
-                        >
-
-                    </label>
-
-                </div>
-
-
-
-                <!-- SUBMIT -->
-
-                <div class="input-group full">
-
-                    <button
-                        type="submit"
-                        class="submit-btn"
-                    >
-
-                        <i class="fa-solid fa-paper-plane"></i>
-
-                        Publish Found Item
-
-                    </button>
-
-                </div>
-
-
-            </div>
-
-        </form>
+        <a href="{% url 'foundform' %}" class="cta-button">
+            Report Found Item
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
 
     </div>
 
 </section>
 
-
-
-
-
-
-
-{% endblock%}
+{% endblock %}

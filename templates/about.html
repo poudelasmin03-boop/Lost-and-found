@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+
+{% block title %}About Us — FindBack{% endblock %}
+
+{% block content %}
+
+<!-- About Hero -->
+<section class="page-hero">
+    <div class="page-hero-content">
+        <span class="section-label">OUR STORY</span>
+        <h1>About <span>FindBack</span></h1>
+        <p>We believe lost items should be found — and we're building the community to make that happen.</p>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="about-mission">
+    <div class="about-container">
+
+        <div class="mission-grid">
+
+            <div class="mission-text">
+                <span class="section-label">OUR MISSION</span>
+                <h2>Reconnecting people with <span>what matters</span></h2>
+                <p>
+                    FindBack was born from a simple idea: when someone loses something important,
+                    there should be a simple, trusted way to get it back. Whether it's a phone
+                    left behind on a bus, a wallet dropped at the market, or keys forgotten
+                    at a café — we're here to help.
+                </p>
+                <p style="margin-top:15px;">
+                    Our platform empowers honest citizens to report found items and connects
+                    them directly with the rightful owners. No fees, no complicated processes —
+                    just a community helping each other.
+                </p>
+
+                <div class="mission-stats">
+                    <div class="m-stat">
+                        <strong>1,200+</strong>
+                        <span>Items Reported</span>
+                    </div>
+                    <div class="m-stat">
+                        <strong>850+</strong>
+                        <span>Reunited</span>
+                    </div>
+                    <div class="m-stat">
+                        <strong>500+</strong>
+                        <span>Active Users</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mission-visual">
+                <div class="about-card-stack">
+                    <div class="about-card ac-1">
+                        <i class="fa-solid fa-heart" style="color:#ef4444;"></i>
+                        <span>Community-first</span>
+                    </div>
+                    <div class="about-card ac-2">
+                        <i class="fa-solid fa-shield-halved" style="color:#2563eb;"></i>
+                        <span>Trustworthy</span>
+                    </div>
+                    <div class="about-card ac-3">
+                        <i class="fa-solid fa-bolt" style="color:#f59e0b;"></i>
+                        <span>Fast & Simple</span>
+                    </div>
+                    <div class="about-icon-center">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="values-section">
+    <div class="about-container">
+
+        <div class="section-heading" style="text-align:center; margin-bottom:55px;">
+            <span class="section-label">WHAT DRIVES US</span>
+            <h2>Our <span>Core Values</span></h2>
+        </div>
+
+        <div class="values-grid">
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h4>Honesty</h4>
+                <p>We believe in the power of honest people doing the right thing. Our community is built on trust and integrity.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <h4>Community</h4>
+                <p>Every returned item strengthens our community. We're stronger together, and we celebrate every successful reunion.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <h4>Simplicity</h4>
+                <p>We keep things simple. Reporting a found item or searching for a lost one should take minutes, not hours.</p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h4>Privacy</h4>
+                <p>We protect your personal information and only share what's necessary to connect finders with owners.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="about-container">
+
+        <div class="section-heading" style="text-align:center; margin-bottom:50px;">
+            <span class="section-label">HELP CENTER</span>
+            <h2>Frequently Asked <span>Questions</span></h2>
+        </div>
+
+        <div class="faq-list">
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>How do I report a found item?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Create a free account, then click "Report Found Item" in the navigation. Fill out the form with the item name, description, location, a clear photo, and your contact number. Submit the form and your report will be live immediately.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Is FindBack free to use?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes! FindBack is completely free for everyone. We believe returning lost items should never come at a cost. Creating an account, searching for items, and reporting found items are all free.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Why was my image rejected?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>We use automatic image quality detection to ensure all photos are clear and useful. If your image was rejected, it was likely too blurry. Try taking the photo in good lighting, close to the item, with a steady hand. PNG, JPG, and JPEG formats are accepted.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>How do I contact a person who found my item?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Browse the found items list or use the search to find your item. Each listing includes the finder's phone number — click the contact button to call them directly. Always meet in a safe, public place to collect your item.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Can I report multiple items?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>Absolutely. There's no limit on how many items you can report. If you find multiple items, please report each one separately with its own photos and details for the best results.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    <span>Is my personal information safe?</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <p>We take your privacy seriously. Only the contact number you provide when reporting an item is visible to others. Your email, password, and other details are never shared publicly.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="about-cta">
+    <div class="about-container">
+        <div class="about-cta-box">
+            <div>
+                <h3>Still have questions?</h3>
+                <p>We're here to help you. Reach out to our community.</p>
+            </div>
+            <div class="about-cta-btns">
+                <a href="{% url 'home' %}" class="primary-btn" style="display:inline-flex;">
+                    <i class="fa-solid fa-house"></i>
+                    Go to Home
+                </a>
+                <a href="{% url 'foundform' %}" class="secondary-btn" style="display:inline-flex; align-items:center; gap:8px;">
+                    <i class="fa-solid fa-plus"></i>
+                    Report Found Item
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Browse Found Items — FindBack{% endblock %}
+
+{% block content %}
+
+<section class="browse-page">
+
+    <div class="browse-header">
+        <div class="browse-header-content">
+            <span class="section-label">FOUND ITEMS</span>
+            <h1>Browse <span>All Items</span></h1>
+            <p>{{ total_items }} item{{ total_items|pluralize }} reported by our community</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <form action="{% url 'search' %}" method="GET" class="filter-bar">
+            <div class="filter-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="name" placeholder="Search by item name..." value="{{ request.GET.name }}">
+            </div>
+            <div class="filter-search">
+                <i class="fa-solid fa-location-dot"></i>
+                <input type="text" name="location" placeholder="Filter by location..." value="{{ request.GET.location }}">
+            </div>
+            <button type="submit" class="search-button">Search</button>
+            <a href="{% url 'items' %}" class="filter-clear">Clear</a>
+        </form>
+    </div>
+
+
+    <div class="browse-container">
+
+        {% if items %}
+
+        <div class="items-grid">
+            {% for item in items %}
+            <div class="item-card">
+                {% if item.itemImage %}
+                <div class="item-img-wrap">
+                    <img src="{{ item.itemImage.url }}" alt="{{ item.itemName }}" loading="lazy">
+                </div>
+                {% else %}
+                <div class="item-img-placeholder">
+                    <i class="fa-solid fa-image"></i>
+                </div>
+                {% endif %}
+
+                <div class="item-card-body">
+                    <div class="item-tag">{{ item.itemTag|default:"Other" }}</div>
+                    <h3>{{ item.itemName }}</h3>
+                    <p>{{ item.itemDescription|truncatechars:100 }}</p>
+
+                    <div class="item-meta">
+                        <span><i class="fa-solid fa-location-dot"></i> {{ item.location }}</span>
+                        <span><i class="fa-regular fa-calendar"></i> {{ item.foundDate }}</span>
+                    </div>
+
+                    <div class="item-footer">
+                        <span class="item-reporter">
+                            <i class="fa-solid fa-user"></i> {{ item.user.username }}
+                        </span>
+                        <a href="tel:{{ item.phoneNo }}" class="contact-btn">
+                            <i class="fa-solid fa-phone"></i>
+                            {{ item.phoneNo }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
+            <h2>No items found</h2>
+            <p>No items match your search. Try different keywords or <a href="{% url 'items' %}">browse all items</a>.</p>
+            <a href="{% url 'foundform' %}" class="primary-btn" style="display:inline-flex; margin-top:20px;">
+                <i class="fa-solid fa-plus"></i>
+                Report a Found Item
+            </a>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

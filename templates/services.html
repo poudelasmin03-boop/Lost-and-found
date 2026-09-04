@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}Our Services — FindBack{% endblock %}
+
+{% block content %}
+
+<!-- Services Hero -->
+<section class="page-hero">
+    <div class="page-hero-content">
+        <span class="section-label">WHAT WE OFFER</span>
+        <h1>Our <span>Services</span></h1>
+        <p>FindBack provides a comprehensive lost & found platform designed to help the community reconnect with their belongings.</p>
+    </div>
+</section>
+
+<!-- Core Services -->
+<section class="services-section">
+    <div class="services-container">
+
+        <div class="services-grid">
+
+            <div class="service-card">
+                <div class="service-icon" style="background:#eff6ff; color:#2563eb;">
+                    <i class="fa-solid fa-file-circle-plus"></i>
+                </div>
+                <h3>Item Reporting</h3>
+                <p>Found something? Quickly report the item with photos and details so the rightful owner can find it. Our image clarity check ensures all reports are high quality.</p>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Upload clear photos</li>
+                    <li><i class="fa-solid fa-check"></i> Add detailed descriptions</li>
+                    <li><i class="fa-solid fa-check"></i> Tag the item category</li>
+                    <li><i class="fa-solid fa-check"></i> Specify found location</li>
+                </ul>
+                <a href="{% url 'foundform' %}" class="service-link">Report an Item →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon" style="background:#f0fdf4; color:#16a34a;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h3>Smart Search</h3>
+                <p>Lost something? Use our powerful search to find items by name and location. Browse all reported items and filter by category to find what you're looking for.</p>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Search by item name</li>
+                    <li><i class="fa-solid fa-check"></i> Filter by location</li>
+                    <li><i class="fa-solid fa-check"></i> Category filtering</li>
+                    <li><i class="fa-solid fa-check"></i> Browse all reports</li>
+                </ul>
+                <a href="{% url 'items' %}" class="service-link">Search Items →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon" style="background:#fdf4ff; color:#9333ea;">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h3>Direct Connection</h3>
+                <p>We connect finders with owners directly. Each report includes contact information so you can reach out immediately and arrange for item return.</p>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Direct phone contact</li>
+                    <li><i class="fa-solid fa-check"></i> Finder's username visible</li>
+                    <li><i class="fa-solid fa-check"></i> Safe handover guidance</li>
+                    <li><i class="fa-solid fa-check"></i> No middleman needed</li>
+                </ul>
+                <a href="{% url 'items' %}" class="service-link">Browse Reports →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon" style="background:#fff7ed; color:#ea580c;">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3>Image Verification</h3>
+                <p>Our AI-powered image clarity check ensures all item photos are clear and usable, reducing fake reports and improving the overall quality of our database.</p>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Automatic blur detection</li>
+                    <li><i class="fa-solid fa-check"></i> Quality assurance</li>
+                    <li><i class="fa-solid fa-check"></i> Reject unclear images</li>
+                    <li><i class="fa-solid fa-check"></i> Trusted community</li>
+                </ul>
+                <a href="{% url 'foundform' %}" class="service-link">Report with Photo →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon" style="background:#f0f9ff; color:#0284c7;">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <h3>Community Platform</h3>
+                <p>Join a growing community of honest individuals dedicated to helping one another. Create a free account and become a trusted member of the FindBack community.</p>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Free account creation</li>
+                    <li><i class="fa-solid fa-check"></i> Report unlimited items</li>
+                    <li><i class="fa-solid fa-check"></i> Community trust system</li>
+                    <li><i class="fa-solid fa-check"></i> Help your neighbors</li>
+                </ul>
+                <a href="{% url 'register' %}" class="service-link">Join Now →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon" style="background:#fef9c3; color:#ca8a04;">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <h3>24/7 Availability</h3>
+                <p>Lost items don't follow business hours. FindBack is available around the clock, so you can report or search for items at any time, from any device.</p>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Always online</li>
+                    <li><i class="fa-solid fa-check"></i> Mobile friendly</li>
+                    <li><i class="fa-solid fa-check"></i> Fast & responsive</li>
+                    <li><i class="fa-solid fa-check"></i> Instant reporting</li>
+                </ul>
+                <a href="{% url 'home' %}" class="service-link">Get Started →</a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Process Section -->
+<section class="process-section">
+    <div class="services-container">
+
+        <div class="section-heading" style="text-align:center; margin-bottom:60px;">
+            <span class="section-label">HOW IT WORKS</span>
+            <h2>Getting started is <span>easy</span></h2>
+        </div>
+
+        <div class="process-steps">
+
+            <div class="process-step">
+                <div class="process-num">1</div>
+                <h4>Create Account</h4>
+                <p>Sign up for free in under a minute. No complicated forms.</p>
+            </div>
+
+            <div class="process-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+            <div class="process-step">
+                <div class="process-num">2</div>
+                <h4>Report or Search</h4>
+                <p>Either report an item you found, or search for your lost item.</p>
+            </div>
+
+            <div class="process-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+            <div class="process-step">
+                <div class="process-num">3</div>
+                <h4>Make Contact</h4>
+                <p>Call the finder directly using the provided contact number.</p>
+            </div>
+
+            <div class="process-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+
+            <div class="process-step">
+                <div class="process-num">4</div>
+                <h4>Get Reunited</h4>
+                <p>Meet up safely and get your belongings back!</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" style="margin:0 auto 80px; max-width:1150px;">
+    <div class="cta-content">
+        <div>
+            <span class="section-label light-label">READY TO START?</span>
+            <h2>Join thousands helping each other every day.</h2>
+            <p>It's free, it's fast, and it makes a real difference.</p>
+        </div>
+        <a href="{% url 'register' %}" class="cta-button">
+            Create Free Account
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+</section>
+
+{% endblock %}

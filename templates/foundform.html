@@ -1,326 +1,218 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% load static %}
-
-
-    <title>Found Items | FindBack</title>
-    {% block css %}
-      <link 
-     rel="stylesheet"
-      href="{% static 'CSS/founditem.css' %}">
-      {% endblock %}
-    
+{% block title %}Report Found Item — FindBack{% endblock %}
 
 {% block content %}
 
-      
+<section class="form-page">
 
-<!-- ================= PAGE ================= -->
+    <div class="form-container">
 
-<main class="page">
-
-
-    <!-- ================= HERO ================= -->
-
-    <section class="hero">
-
-        <div class="circle-one"></div>
-        <div class="circle-two"></div>
-
-
-        <div class="hero-content">
-
-            <div class="hero-label">
-
-                <i class="fa-solid fa-hand-holding-heart"></i>
-
-                HELP PEOPLE FIND THEIR BELONGINGS
-
-            </div>
-
-
+        <div class="form-heading">
+            <span class="section-label">HELP SOMEONE</span>
             <h1>
-
-                Found Something?
-
-                <br>
-
-                <span>Maybe Someone Is Looking For It.</span>
-
+                Report a
+                <span>found item.</span>
             </h1>
-
-
-            <p class="hero-description">
-
-                Browse items that have been found and reported
-                by people in the community. Search by item name
-                or location to find something that belongs to you.
-
+            <p>
+                Tell us about the item you found.
+                The owner may be looking for it right now.
             </p>
+        </div>
+
+        {% if not user.is_authenticated %}
+        <div class="form-error" style="margin-bottom:25px;">
+            <span><i class="fa-solid fa-exclamation"></i></span>
+            You must be <a href="{% url 'login' %}" style="color:inherit;font-weight:700;">logged in</a> to report a found item.
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="form-error">
+            <span>
+                <i class="fa-solid fa-exclamation"></i>
+            </span>
+            {{ error }}
+        </div>
+        {% endif %}
+
+        {% if success %}
+        <div class="form-success">
+            <span>
+                <i class="fa-solid fa-check"></i>
+            </span>
+            {{ success }}
+        </div>
+        {% endif %}
 
 
-            <!-- SEARCH -->
+        <form method="POST" enctype="multipart/form-data" class="found-form" {% if not user.is_authenticated %}onsubmit="return false;"{% endif %}>
 
-            <div class="search-container">
+            {% csrf_token %}
 
-                <form
-                    method="GET"
-                    action="{% url 'search' %}#result"
-                    class="search-form"
-                >
+            <div class="form-section">
 
+                <div class="form-section-title">
+                    <div class="form-number">01</div>
+                    <div>
+                        <h3>Item information</h3>
+                        <p>Tell us what you found.</p>
+                    </div>
+                </div>
 
-                    <div class="search-input">
+                <div class="form-grid">
 
-                        <i class="fa-solid fa-magnifying-glass"></i>
-
+                    <div class="input-group">
+                        <label>Item Name <span>*</span></label>
                         <input
                             type="text"
-                            name="name"
-                            placeholder="Search item name..."
-                            value="{{ name|default:'' }}"
+                            name="itemName"
+                            placeholder="e.g. iPhone 15, Wallet, Backpack"
+                            required
                         >
-
                     </div>
 
-
-                    <div class="search-input">
-
-                        <i class="fa-solid fa-location-dot"></i>
-
+                    <div class="input-group">
+                        <label>Found Location <span>*</span></label>
                         <input
                             type="text"
                             name="location"
-                            placeholder="Search location..."
-                            value="{{ location|default:'' }}"
+                            placeholder="e.g. New Baneshwor, Kathmandu"
+                            required
                         >
-
                     </div>
 
+                </div>
 
-                    <button
-                        type="submit"
-                        class="search-btn"
+                <div class="input-group">
+                    <label>Item Category</label>
+                    <select name="itemTag" class="form-select">
+                        <option value="electronics">Electronics</option>
+                        <option value="wallet">Wallet / Purse</option>
+                        <option value="bag">Bag / Backpack</option>
+                        <option value="keys">Keys</option>
+                        <option value="document">Documents / ID</option>
+                        <option value="jewelry">Jewelry</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Description <span>*</span></label>
+                    <textarea
+                        name="itemDescription"
+                        rows="5"
+                        placeholder="Describe the item: color, brand, unique marks, condition, etc."
+                        required
+                    ></textarea>
+                </div>
+
+            </div>
+
+
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-number">02</div>
+                    <div>
+                        <h3>Item photo</h3>
+                        <p>Upload a clear photo of the item.</p>
+                    </div>
+                </div>
+
+                <label class="upload-box" for="itemImage">
+
+                    <input
+                        type="file"
+                        name="itemImage"
+                        id="itemImage"
+                        accept="image/*"
+                        required
+                        onchange="previewImage(event)"
                     >
 
-                        <i class="fa-solid fa-search"></i>
-
-                        Search
-
-                    </button>
-
-
-                </form>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= ITEMS ================= -->
-
-    <section id="result" class="items-section">
-
-
-        <div class="section-heading">
-
-            <small>
-                Community Reports
-            </small>
-
-            <h2>
-                Recently Found Items
-            </h2>
-
-            <p>
-                These items have been reported by members of our community.
-            </p>
-
-        </div>
-
-
-        {% if items %}
-
-            <div class="items-grid">
-
-
-                {% for item in items %}
-
-
-                    <article class="item-card">
-
-
-                        <!-- IMAGE -->
-
-                        <div class="item-image">
-
-                            {% if item.itemImage %}
-
-                                <img
-                                    src="{{ item.itemImage.url }}"
-                                    alt="{{ item.itemName }}"
-                                >
-
-                            {% else %}
-
-                                <div style="
-                                    width:100%;
-                                    height:100%;
-                                    display:flex;
-                                    align-items:center;
-                                    justify-content:center;
-                                    font-size:55px;
-                                    color:#6366f1;
-                                ">
-
-                                    <i class="fa-solid fa-image"></i>
-
-                                </div>
-
-                            {% endif %}
-
-
-                            <div class="found-badge">
-
-                                <i class="fa-solid fa-check"></i>
-
-                                Found
-
-                            </div>
-
+                    <div id="uploadContent">
+                        <div class="upload-icon">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
                         </div>
+                        <strong>Click to upload an image</strong>
+                        <span>PNG, JPG or JPEG · Max 5MB</span>
+                    </div>
 
+                    <img id="imagePreview" class="image-preview" alt="Image preview">
 
-                        <!-- CONTENT -->
+                </label>
 
-                        <div class="item-content">
-
-
-                            <h3>
-                                {{ item.itemName }}
-                            </h3>
-
-
-                            <p class="description">
-
-                                {{ item.itemDescription }}
-
-                            </p>
-
-
-                            <div class="item-details">
-
-
-                                <div class="detail">
-
-                                    <i class="fa-solid fa-location-dot"></i>
-
-                                    <span>
-                                        {{ item.location }}
-                                    </span>
-
-                                </div>
-
-
-                                <div class="detail">
-
-                                    <i class="fa-solid fa-calendar-days"></i>
-
-                                    <span>
-                                        {{ item.foundDate }}
-                                    </span>
-
-                                </div>
-
-
-                                <div class="detail">
-
-                                    <i class="fa-solid fa-phone"></i>
-
-                                    <span>
-                                        {{ item.phoneNo }}
-                                    </span>
-
-                                </div>
-
-
-                            </div>
-
-
-                            <a href="#" class="view-button">
-
-                                View Details
-
-                                <i class="fa-solid fa-arrow-right"></i>
-
-                            </a>
-
-
-                        </div>
-
-                    </article>
-
-
-                {% endfor %}
-
+                <div class="image-tip">
+                    <i class="fa-regular fa-lightbulb"></i>
+                    Make sure the image is clear and well-lit. Blurry images may be rejected.
+                </div>
 
             </div>
 
 
-        {% else %}
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    <div class="form-number">03</div>
+                    <div>
+                        <h3>Additional details</h3>
+                        <p>Help the owner contact you.</p>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>Date Found <span>*</span></label>
+                        <input
+                            type="date"
+                            name="foundDate"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Contact Number <span>*</span></label>
+                        <input
+                            type="tel"
+                            name="phoneNo"
+                            placeholder="98XXXXXXXX"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+            </div>
 
 
-            <div class="empty">
 
-                <i class="fa-solid fa-box-open"></i>
+            <div class="form-submit">
 
-                <h3>
-                    No Found Items
-                </h3>
+                <button type="submit" class="submit-btn" {% if not user.is_authenticated %}disabled style="opacity:0.5;cursor:not-allowed;"{% endif %}>
+                    Submit Found Item
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
 
                 <p>
-                    No items were found matching your search.
-                    Try searching with another item name or location.
+                    By submitting, you confirm that the information provided is accurate.
+                    {% if not user.is_authenticated %}
+                    Please <a href="{% url 'login' %}">login</a> to submit.
+                    {% endif %}
                 </p>
 
             </div>
 
 
-        {% endif %}
+        </form>
 
 
-    </section>
+    </div>
 
-
-    <!-- ================= CTA ================= -->
-
-    <section class="cta">
-
-        <h2>
-            Found Something That Isn't Yours?
-        </h2>
-
-        <p>
-            Report it on FindBack and help the owner get it back.
-        </p>
-
-        <a
-            href="{% url 'foundform' %}"
-            class="cta-button"
-        >
-
-            <i class="fa-solid fa-plus"></i>
-
-            Report Found Item
-
-        </a>
-
-    </section>
-
-
-</main>
-
+</section>
 
 {% endblock %}
