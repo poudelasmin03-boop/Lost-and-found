@@ -7,14 +7,14 @@
 <section class="browse-page">
 
     <div class="browse-header">
-        <div class="browse-header-content">
+        <div class="browse-header-content" data-aos="fade-left">
             <span class="section-label">FOUND ITEMS</span>
             <h1>Browse <span>All Items</span></h1>
             <p>{{ total_items }} item{{ total_items|pluralize }} reported by our community</p>
         </div>
 
         <!-- Filter Bar -->
-        <form action="{% url 'search' %}" method="GET" class="filter-bar">
+        <form action="{% url 'search' %}" method="GET" class="filter-bar" data-aos="fade-up" data-aos-duration="1000">
             <div class="filter-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" name="name" placeholder="Search by item name..." value="{{ request.GET.name }}">

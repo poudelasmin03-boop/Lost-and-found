@@ -20,12 +20,21 @@
 
     <!-- Your CSS -->
     <link rel="stylesheet" href="{% static 'CSS/base.css' %}">
+
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  
     {% block extra_css %}{% endblock %}
 </head>
 
 <body>
 
-<header class="navbar">
+<header class="navbar" >
     <div class="nav-container">
 
         <a href="{% url 'home' %}" class="logo">
@@ -106,10 +115,11 @@
     {% endblock %}
 </main>
 
-<footer class="footer">
+<footer class="footer" data-aos="fade-up"
+     data-aos-anchor-placement="top-bottom" data-aos-animation=" 3000">
     <div class="footer-container">
 
-        <div class="footer-brand">
+        <div class="footer-brand" data-aos="zoom-in">
 
             <div class="logo footer-logo">
                 <span class="logo-icon">
@@ -175,6 +185,7 @@
 
 
 </footer>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script src="{% static 'js/script.js' %}"></script>
 

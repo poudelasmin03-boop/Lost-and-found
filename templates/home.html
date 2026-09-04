@@ -8,7 +8,9 @@
 
     <div class="hero-container">
 
-        <div class="hero-content">
+        <div class="hero-content"  data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1500">
 
             <div class="hero-badge">
                 <span class="pulse-dot"></span>
@@ -124,7 +126,7 @@
 
 <section class="stats-section">
 
-    <div class="stats-container">
+    <div class="stats-container" data-aos="fade-up">
 
         <div class="stat">
             <strong>1,200+</strong>
@@ -152,20 +154,22 @@
 
 <!-- Recent Found Items -->
 {% if recent_items %}
-<section class="recent-section">
-    <div class="recent-container">
+<section class="recent-section" data-aos="fade-up"
+     data-aos-duration="3000">
+    <div class="recent-container" data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom">
 
-        <div class="section-heading" style="text-align:center; margin-bottom:50px;">
-            <span class="section-label">LATEST REPORTS</span>
+        <div class="section-heading" style="text-align:center; margin-bottom:50px;" data-aos="fade-up">
+            <span class="section-label" data-aos="fade-up">LATEST REPORTS</span>
             <h2>Recently <span>Found Items</span></h2>
             <p>Browse the latest items that have been found and reported by our community.</p>
         </div>
 
-        <div class="items-grid">
+        <div class="items-grid" data-aos="fade-up">
             {% for item in recent_items %}
             <div class="item-card">
                 {% if item.itemImage %}
-                <div class="item-img-wrap">
+                <div class="item-img-wrap" data-aos="fade-up">
                     <img src="{{ item.itemImage.url }}" alt="{{ item.itemName }}">
                 </div>
                 {% else %}
@@ -203,11 +207,12 @@
 </section>
 {% endif %}
 
-<section class="how-section" id="how-it-works">
+<section class="how-section" id="how-it-works"  class="animate__animated animate__bounce">
 
-    <div class="section-heading" style="text-align:center;">
+    <div class="section-heading" style="text-align:center;" data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom">
 
-        <span class="section-label">SIMPLE PROCESS</span>
+        <span class="section-label" data-aos="fade-up">SIMPLE PROCESS</span>
 
         <h2>
             Finding your item
@@ -222,9 +227,11 @@
     </div>
 
 
-    <div class="steps">
+    <div class="steps" data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom">
 
-        <div class="step">
+        <div class="step" data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom">
             <div class="step-number">01</div>
             <div class="step-icon">
                 <i class="fa-solid fa-file-circle-plus"></i>
